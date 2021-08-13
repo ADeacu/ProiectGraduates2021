@@ -28,15 +28,15 @@ pipeline {
             }
         }
 		
-		docker push l-am facut manual de pe masina de Jenkins
+	docker push l-am facut manual de pe masina de Jenkins si apoi am pus liniile de mai jos pentru deploy
 
         stage('Connect over with ssh and deploy container') {
-			steps {
-				script {
-						sh "ssh vagrant@192.168.50.22 'sudo docker run -it -d -p 8080:8080 deacuandrei/proiect:proiect'"
-				}
-
+		steps {
+			script {
+				sh "ssh vagrant@192.168.50.22 'sudo docker run -it -d -p 8080:8080 deacuandrei/proiect:proiect'"
 			}
+
 		}
+	}
     }
 }
