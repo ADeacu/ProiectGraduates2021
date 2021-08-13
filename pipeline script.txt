@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+    
+    environment {
+        imagename = "proiect"
+        registryCredential = 'Dockerhub'
+        dockerImage = ''
+    }
+    
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git 'https://github.com/ADeacu/java-mvn-hello-world-web-app.git'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+        
+        stage('Building image') {
+            steps{
+                script {
+                    dockerImage = docker.build imagename
+                }
+            }
+        }
+		
+		docker push l-am facut manual de pe masina de Jenkins
+
+        stage('Connect over with ssh and deploy container') {
+			steps {
+				script {
+						sh "ssh vagrant@192.168.50.22 'sudo docker run -it -d -p 8080:8080 deacuandrei/proiect:proiect'"
+				}
+
+			}
+		}
+    }
+}
