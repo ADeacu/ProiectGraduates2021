@@ -1,0 +1,19 @@
+localhost ansible_connection=local
+
+Jenkins ansible_host=192.168.50.21
+Production ansible_host=192.168.50.22
+
+[jenkins_nodes]
+Jenkins
+
+[docker_nodes]
+Controller
+Jenkins
+
+[maven_nodes]
+Controller
+
+[ubuntu:children]
+docker_nodes
+
+[ubuntu:vars]

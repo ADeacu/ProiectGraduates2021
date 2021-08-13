@@ -1,0 +1,13 @@
+- hosts: all
+
+  become: yes
+
+  vars:
+    secure_hosts:
+      - url: tools.local
+        port: 5000
+    restartable_services:
+      - docker
+
+  roles:
+  - docker

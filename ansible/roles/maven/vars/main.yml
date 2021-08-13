@@ -1,0 +1,6 @@
+---
+# vars file for maven
+
+maven_archive: "apache-maven-{{maven_version}}-bin.zip"
+maven_url: "{{maven_mirror}}/apache/maven/maven-3/{{maven_version}}/binaries/{{maven_archive}}"
+

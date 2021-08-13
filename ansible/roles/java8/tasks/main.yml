@@ -1,0 +1,5 @@
+---
+# tasks file for java8
+
+- name: Install Java
+  apt: pkg=default-jre

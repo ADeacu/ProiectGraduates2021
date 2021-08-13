@@ -1,0 +1,26 @@
+---
+  - name: download and unarchive maven {{ maven_version }} - no copy
+    unarchive:
+      src: "{{ maven_url }}"
+      dest: /opt
+      copy: no
+      creates: "/opt/apache-maven-{{ maven_version }}.zip"
+
+  - name: Create symlink for maven
+    file:
+      src: "/opt/apache-maven-{{maven_version}}/bin/mvn"
+      dest: "/usr/bin/mvn"
+      state: link
+
+  - name: Capture maven version
+    command: mvn -version
+    register: mvn_version_check
+    tags:
+      - mvn_version
+
+  - name: Display maven version
+    debug:
+      var: mvn_version_check.stdout_lines[0]
+    tags:
+      - mvn_version
+

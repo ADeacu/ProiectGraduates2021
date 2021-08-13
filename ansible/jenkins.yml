@@ -1,0 +1,13 @@
+- hosts: [jenkins_nodes]
+  
+  environment:
+    GIT_SSL_NO_VERIFY: true
+    validate_certs: false
+  
+  
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  become: true
+  
+  roles:
+  - ansible-role-jenkins

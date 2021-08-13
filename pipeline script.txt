@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+    
+    environment {
+        imagename = "aplicatie_spring"
+        registryCredential = 'Dockerhub'
+        dockerImage = ''
+    }
+    
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git 'https://github.com/ADeacu/Simplest-Spring-Boot-Hello-World'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+        
+        stage('Building image') {
+            steps{
+                script {
+                    dockerImage = docker.build imagename
+                }
+            }
+        }
+        stage('Building container') {
+            steps{
+                script {
+                    sh 'docker container run -d -p 8081:8081 aplicatie_spring'
+                }
+            }
+        }
+    }
+}
